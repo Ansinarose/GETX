@@ -2,6 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:getx_sample/screens/homescreen.dart';
 import 'package:getx_sample/widgets/alertDialog_screen.dart';
+import 'package:getx_sample/widgets/bottomsheet_screen.dart';
+import 'package:getx_sample/widgets/named_rout.dart';
+import 'package:getx_sample/widgets/route_navigation.dart';
 import 'package:getx_sample/widgets/snackBar_screen.dart';
 
 void main() {
@@ -13,7 +16,16 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return GetMaterialApp(debugShowCheckedModeBanner: false,
+    return GetMaterialApp(
+      initialRoute: "/",
+      defaultTransition: Transition.zoom,
+      getPages: [
+        GetPage(name: '/', page: () => MyApp()),
+        GetPage(name: '/home', 
+        page: () => HomeScreen(),
+        transition: Transition.leftToRight)
+      ],
+      debugShowCheckedModeBanner: false,
       theme: ThemeData(
        
       appBarTheme: const AppBarTheme(color: Colors.blue),
@@ -29,8 +41,10 @@ class MyApp extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
                   SnackBar_Screen(),
-                  DialogScreen(),
-
+                  DialogScreen(), 
+                  BottomSheetScreen(),
+                  RoutNavigation(),
+                  NameedRout(),
                 ],
               ),
             ),
